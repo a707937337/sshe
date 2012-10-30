@@ -40,20 +40,20 @@
 			} ]
 		}).dialog('close');
 		 */
-		 
+
 		$('#index_regForm').form({
 			url : '${pageContext.request.contextPath}/userAction!reg.action',
 			success : function(r) {
 				//var obj=eval("("+r+")");// 不推荐,这是原生的转换成json对象的方法
-				var obj=jQuery.parseJSON(r);
-				if(obj.success){
+				var obj = jQuery.parseJSON(r);
+				if (obj.success) {
 					$("#index_regDialog").dialog("close");
 				}
 				$.messager.show({
-					title:'提示',
-					msg:obj.msg,
-					timeOut:5000,
-					showType:'slide'
+					title : '提示',
+					msg : obj.msg,
+					timeOut : 5000,
+					showType : 'slide'
 				});
 			}
 		});
@@ -89,11 +89,13 @@
 		<table>
 			<tr>
 				<th>登陆名</th>
-				<td><input /></td>
+				<td><input />
+				</td>
 			</tr>
 			<tr>
 				<th>密码</th>
-				<td><input /></td>
+				<td><input />
+				</td>
 			</tr>
 		</table>
 	</div>
@@ -111,14 +113,12 @@
 				<tr>
 					<th>登陆名</th>
 					<td><input name="name" class="easyui-validatebox"
-						data-options="required:true,missingMessage:'登录名不能为空'" />
-					</td>
+						data-options="required:true,missingMessage:'登录名不能为空'" /></td>
 				</tr>
 				<tr>
 					<th>密码</th>
 					<td><input name="password" class="easyui-validatebox"
-						type="password" data-options="required:true" />
-					</td>
+						type="password" data-options="required:true" /></td>
 				</tr>
 				<tr>
 					<th>重复密码</th>
