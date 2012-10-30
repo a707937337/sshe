@@ -1,18 +1,15 @@
 package sy.action;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.apache.log4j.Logger;
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import com.alibaba.fastjson.JSON;
 
 import sy.model.Tuser;
 import sy.service.UserServiceI;
@@ -20,7 +17,7 @@ import sy.util.BaseAction;
 
 @ParentPackage("basePackage")// 这里是package的name
 @Namespace("/")//命名空间
-@Action(value = "userAction",results={@Result(name="test",type="redirectAction", location="userAction!save.action")})//这里是action的name,放这里得支持动态方法调用  例如:xxxAction!add.action
+@Action(value = "userAction")//这里是action的name,放这里得支持动态方法调用  例如:xxxAction!add.action
 public class UserAction extends BaseAction {
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = Logger.getLogger(UserAction.class);
@@ -32,6 +29,7 @@ public class UserAction extends BaseAction {
 	public void reg(){
 		Map<String,Object> json=new HashMap<String,Object>();
 		Tuser u=new Tuser();
+		u.setId(UUID.randomUUID().toString());
 		u.setName(name);
 		u.setPassword(password);
 		try {
@@ -43,7 +41,7 @@ public class UserAction extends BaseAction {
 			json.put("msg", "注册失败");
 			e.printStackTrace();
 		}
-		writeJson(json);
+		super.writeJson(json);
 	}
 	public String getName() {
 		return name;
