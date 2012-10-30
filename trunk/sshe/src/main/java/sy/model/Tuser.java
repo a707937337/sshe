@@ -14,31 +14,17 @@ public class Tuser implements java.io.Serializable {
 
 	// Fields
 
-	private long id;
+	private String id;
 	private String name;
 	private String password;
 
-	// Constructors
-
-	/** default constructor */
-	public Tuser() {
-	}
-
-	/** full constructor */
-	public Tuser(String name, String password) {
-		this.name = name;
-		this.password = password;
-	}
-
-	// Property accessors
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", nullable = false)
-	public long getId() {
+	public String getId() {
 		return this.id;
 	}
 
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
