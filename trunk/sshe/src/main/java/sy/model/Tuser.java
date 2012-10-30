@@ -9,7 +9,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
 @Entity
-@Table(name = "tuser", catalog = "sy")
+@Table(name = "tuser", catalog = "sshe")
 public class Tuser implements java.io.Serializable {
 
 	// Fields
