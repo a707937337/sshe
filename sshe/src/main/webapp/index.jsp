@@ -41,22 +41,6 @@
 		}).dialog('close');
 		 */
 
-		$('#index_regForm').form({
-			url : '${pageContext.request.contextPath}/userAction!reg.action',
-			success : function(r) {
-				//var obj=eval("("+r+")");// 不推荐,这是原生的转换成json对象的方法
-				var obj = jQuery.parseJSON(r);
-				if (obj.success) {
-					$("#index_regDialog").dialog("close");
-				}
-				$.messager.show({
-					title : '提示',
-					msg : obj.msg,
-					timeOut : 5000,
-					showType : 'slide'
-				});
-			}
-		});
 	});
 </script>
 </head>
@@ -65,70 +49,12 @@
 	<div data-options="region:'north'" style="height: 60px"></div>
 	<div data-options="region:'south'" style="height: 30px"></div>
 	<div data-options="region:'west',split:true" style="width: 200px">
-		<div class="easyui-panel"
-			data-options="title:'west',border:false,fit:true"></div>
+		<div class="easyui-panel" data-options="title:'west',border:false,fit:true"></div>
 	</div>
 	<div data-options="region:'east',title:'east'" style="width: 200px"></div>
-	<!-- 登陆按钮 -->
-	<div class="easyui-dialog"
-		data-options="title:'登陆',modal:true,closable:false,buttons:[{
-				text:'注册',
-				iconCls:'icon-edit',
-				handler:function(){
-					$('#index_regDialog input').val('');
-					$('#index_regDialog').dialog('open');
-				}
-			},{
-				text:'登陆',
-				iconCls:'icon-help',
-				handler:function(){
-					alert('登陆')	
-				}
-			
-			}]">
-		<table>
-			<tr>
-				<th>登陆名</th>
-				<td><input />
-				</td>
-			</tr>
-			<tr>
-				<th>密码</th>
-				<td><input />
-				</td>
-			</tr>
-		</table>
-	</div>
-	<!-- 注册dialog -->
-	<div id="index_regDialog" class="easyui-dialog" style="width:250px"
-		data-options="title:'登陆',closed:true,modal:true,buttons:[{
-				text:'注册',
-				iconCls:'icon-edit',
-				handler:function(){
-					$('#index_regForm').submit();
-				}
-			}]">
-		<form method="post" id="index_regForm">
-			<table>
-				<tr>
-					<th>登陆名</th>
-					<td><input name="name" class="easyui-validatebox"
-						data-options="required:true,missingMessage:'登录名不能为空'" /></td>
-				</tr>
-				<tr>
-					<th>密码</th>
-					<td><input name="password" class="easyui-validatebox"
-						type="password" data-options="required:true" /></td>
-				</tr>
-				<tr>
-					<th>重复密码</th>
-					<td><input name="rePassword" class="easyui-validatebox"
-						type="password"
-						data-options="required:true,validType:'rePwd[\'#index_regForm input[name=password]\']'" />
-					</td>
-				</tr>
-			</table>
-		</form>
-	</div>
+	<!-- 登陆页 -->
+	<jsp:include page="user/login.jsp"></jsp:include>
+	<!-- 注册页 -->
+	<jsp:include page="user/reg.jsp"></jsp:include>
 </body>
 </html>

@@ -11,27 +11,32 @@ import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.opensymphony.xwork2.ModelDriven;
+
 import sy.model.Tuser;
+import sy.pageModel.User;
 import sy.service.UserServiceI;
 import sy.util.BaseAction;
 
 @ParentPackage("basePackage")// 这里是package的name
 @Namespace("/")//命名空间
 @Action(value = "userAction")//这里是action的name,放这里得支持动态方法调用  例如:xxxAction!add.action
-public class UserAction extends BaseAction {
+public class UserAction extends BaseAction implements ModelDriven<User>{
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = Logger.getLogger(UserAction.class);
-	private String name;
-	private String password;
-	private String json;
+	User user=new User();
+	@Override
+	public User getModel() {
+		return user;
+	}
 	@Autowired
 	private UserServiceI userService;
 	public void reg(){
 		Map<String,Object> json=new HashMap<String,Object>();
 		Tuser u=new Tuser();
 		u.setId(UUID.randomUUID().toString());
-		u.setName(name);
-		u.setPassword(password);
+		u.setName(user.getName());
+		u.setPassword(user.getPassword());
 		try {
 			userService.save(u);
 			json.put("success", true);
@@ -42,24 +47,6 @@ public class UserAction extends BaseAction {
 			e.printStackTrace();
 		}
 		super.writeJson(json);
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public String getJson() {
-		return json;
-	}
-	public void setJson(String json) {
-		this.json = json;
 	}
 	public UserServiceI getUserService() {
 		return userService;
@@ -73,5 +60,13 @@ public class UserAction extends BaseAction {
 	public static Logger getLogger() {
 		return logger;
 	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	
 
 }
