@@ -17,12 +17,12 @@ import sy.pageModel.User;
 import sy.pageModel.util.Json;
 import sy.service.UserServiceI;
 import sy.util.BaseAction;
+ 
 
 /**
- * 创建人:WangHuifeng
- * 创建时间:2012-10-31 下午1:47:46
+ * 创建人： 王汇丰
+ * 创建时间：2012-10-31 下午5:40:15
  */
- 
 @ParentPackage("basePackage")// 这里是package的name
 @Namespace("/")//命名空间
 @Action(value = "userAction")//这里是action的name,放这里得支持动态方法调用  例如:xxxAction!add.action
@@ -59,9 +59,9 @@ public class UserAction extends BaseAction implements ModelDriven<User>{
 		super.writeJson(json);
 	}
 	/**
-	 * 创建人:WangHuifeng
-	 * 创建时间:2012-10-31 下午1:51:30
-	 * @return void
+	 * @author 王汇丰
+	 * 2012-10-31 下午5:40:45
+	 * @returnType void 
 	 * @information 登陆
 	 */
 	public void login(){
