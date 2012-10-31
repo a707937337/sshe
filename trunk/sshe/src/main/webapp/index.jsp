@@ -24,6 +24,7 @@
 	type="text/css"></link>
 <link rel="stylesheet" href="jslib/jquery-easyui-1.3.1/themes/icon.css"
 	type="text/css"></link>
+<link rel="stylesheet" href="style/syCss.css" type="text/css"></link>
 <script type="text/javascript">
 	$(function() {
 		/**
