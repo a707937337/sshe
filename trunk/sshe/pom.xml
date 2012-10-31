@@ -65,7 +65,7 @@
 			<artifactId>struts2-convention-plugin</artifactId>
 			<version>2.3.4.1</version>
 		</dependency>
-		
+
 		<!-- spring3 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -146,6 +146,7 @@
 			<artifactId>aspectjweaver</artifactId>
 			<version>1.7.1</version>
 		</dependency>
+		
 	</dependencies>
 	<build>
 		<plugins>
