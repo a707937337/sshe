@@ -27,32 +27,24 @@
 <link rel="stylesheet" href="style/syCss.css" type="text/css"></link>
 <script type="text/javascript">
 	$(function() {
-		/**
-		$('#index_regDialog').dialog({
-			title : '登陆',
-			//closed:true,
-			modal : true,
-			buttons : [ {
-				text : '注册',
-				iconCls : 'icon-edit',
-				handler : function() {
-					alert('注册');
-				}
-			} ]
-		}).dialog('close');
-		 */
-
+		$('#index_westPanel').panel({
+			title:'west',
+			border:false,
+			fit:true,
+			href:'<%=basePath%>/layout/west.jsp'
+		});
 	});
 </script>
 </head>
 <body class="easyui-layout">
-	<div data-options="region:'center',title:'center'"></div>
-	<div data-options="region:'north'" style="height: 60px"></div>
-	<div data-options="region:'south'" style="height: 30px"></div>
+	<div data-options="region:'center',title:'center',href:'<%=basePath%>layout/center.jsp'"></div>
+	<div data-options="region:'north',href:'<%=basePath%>layout/north.jsp'" style="height: 60px"></div>
+	<div data-options="region:'south',href:'<%=basePath%>layout/south.jsp'" style="height: 30px"></div>
 	<div data-options="region:'west',split:true" style="width: 200px">
-		<div class="easyui-panel" data-options="title:'west',border:false,fit:true"></div>
+		<div id="index_westPanel">
+		</div>
 	</div>
-	<div data-options="region:'east',title:'east'" style="width: 200px"></div>
+	<div data-options="region:'east',title:'east',href:'<%=basePath%>layout/south.jsp'" style="width: 200px"></div>
 	<!-- 登陆页 -->
 	<jsp:include page="user/login.jsp"></jsp:include>
 	<!-- 注册页 -->

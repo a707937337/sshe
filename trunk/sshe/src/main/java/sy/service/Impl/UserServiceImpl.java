@@ -1,8 +1,9 @@
 package sy.service.Impl;
 
-import java.util.List;
+import java.util.UUID;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sy.dao.UserDaoI;
@@ -29,7 +30,10 @@ public class UserServiceImpl implements UserServiceI {
 		this.userDao = userDao;
 	}
 
-	public void save(Tuser u) {
+	public void reg(User user) {
+		user.setId(UUID.randomUUID().toString());
+		Tuser u=new Tuser();
+		BeanUtils.copyProperties(user, u);
 		userDao.save(u);
 	}
 

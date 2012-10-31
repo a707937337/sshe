@@ -1,11 +1,12 @@
 package sy.dao.impl;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+
 import sy.dao.UserDaoI;
 import sy.model.Tuser;
 import sy.pageModel.User;
 
-@Repository("userDao")
+@Service("userDao")
 public class UserDaoImpl extends BaseDaoImpl<Tuser> implements UserDaoI {
 	@Override
 	public User login(User user) {

@@ -7,7 +7,7 @@ import sy.pageModel.User;
 
 public interface UserServiceI {
 	public void test();
-	public void save(Tuser u);
+	public void reg(User user);
 	/**
 	 * 创建人:WangHuifeng
 	 * 创建时间:2012-10-31 下午2:34:09
