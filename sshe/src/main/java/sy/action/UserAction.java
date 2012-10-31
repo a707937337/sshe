@@ -42,21 +42,17 @@ public class UserAction extends BaseAction implements ModelDriven<User>{
 	 * @return void
 	 */
 	public void reg(){
-		Map<String,Object> json=new HashMap<String,Object>();
-		Tuser u=new Tuser();
-		u.setId(UUID.randomUUID().toString());
-		u.setName(user.getName());
-		u.setPassword(user.getPassword());
+		Json j=new Json();
 		try {
-			userService.save(u);
-			json.put("success", true);
-			json.put("msg", "注册成功");
+			userService.reg(user);
+			j.setSuccess(true);
+			j.setMsg("注册成功");
+			j.setObj(null);
 		} catch (Exception e) {
-			json.put("success", false);
-			json.put("msg", "注册失败");
+			j.setMsg("注册失败！");
 			e.printStackTrace();
 		}
-		super.writeJson(json);
+		super.writeJson(j);
 	}
 	/**
 	 * @author 王汇丰
@@ -77,6 +73,16 @@ public class UserAction extends BaseAction implements ModelDriven<User>{
 		}
 		super.writeJson(j);
 	}
+	/**
+	 * @author 王汇丰
+	 * 2012-10-31 下午7:09:51
+	 * @returnType void 
+	 * @information 获取用户左边菜单栏
+	 */
+	public void meun(){
+		
+	}
+	
 	public UserServiceI getUserService() {
 		return userService;
 	}
