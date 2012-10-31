@@ -8,16 +8,21 @@ import org.apache.log4j.Logger;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
-import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ModelDriven;
 
 import sy.model.Tuser;
 import sy.pageModel.User;
+import sy.pageModel.util.Json;
 import sy.service.UserServiceI;
 import sy.util.BaseAction;
 
+/**
+ * 创建人:WangHuifeng
+ * 创建时间:2012-10-31 下午1:47:46
+ */
+ 
 @ParentPackage("basePackage")// 这里是package的name
 @Namespace("/")//命名空间
 @Action(value = "userAction")//这里是action的name,放这里得支持动态方法调用  例如:xxxAction!add.action
@@ -31,6 +36,11 @@ public class UserAction extends BaseAction implements ModelDriven<User>{
 	}
 	@Autowired
 	private UserServiceI userService;
+	/**
+	 * 创建人:WangHuifeng
+	 * 创建时间:2012-10-31 下午1:49:58
+	 * @return void
+	 */
 	public void reg(){
 		Map<String,Object> json=new HashMap<String,Object>();
 		Tuser u=new Tuser();
@@ -47,6 +57,25 @@ public class UserAction extends BaseAction implements ModelDriven<User>{
 			e.printStackTrace();
 		}
 		super.writeJson(json);
+	}
+	/**
+	 * 创建人:WangHuifeng
+	 * 创建时间:2012-10-31 下午1:51:30
+	 * @return void
+	 * @information 登陆
+	 */
+	public void login(){
+		Json j=new Json();
+		User u=userService.login(user);
+		if(u!=null){
+			j.setSuccess(true);
+			j.setMsg("登陆成功");
+			j.setObj(null);
+			session.put("currentUser", user);
+		}else{
+			j.setMsg("登陆失败");
+		}
+		super.writeJson(j);
 	}
 	public UserServiceI getUserService() {
 		return userService;
