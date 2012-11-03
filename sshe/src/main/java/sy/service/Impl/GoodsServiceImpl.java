@@ -42,6 +42,9 @@ public class GoodsServiceImpl extends BaseDaoImpl<SyGoods> implements GoodsServi
 		String hql="from SyGoods sy where 1=1";
 		Map<String,Object> map=new HashMap<String,Object>();
 		hql=addWhereSql(hql,goods,map);
+		if (goods.getSort() != null && goods.getOrder() != null) {
+			hql += " order by " + goods.getSort() + " " + goods.getOrder();
+		}
 		j.setRows(changeModel(goodsDao.find(hql,map,goods.getPage(),goods.getRows())));
 		j.setTotal(this.total(goods));
 		return j;
