@@ -13,6 +13,7 @@
 	var datagrid;
 	$(function() {
 		var admin_goods_searchForm=$('#admin_goods_searchForm');
+		var admin_goods_editRow=undefined;
 		datagrid = $('#datagrid').datagrid({
 			url : 'goodsAction!dataGrid.action',//此处返回json
 			title : '',
@@ -35,7 +36,7 @@
 				field : 'id',
 				width : 150,
 				sortable : true,
-				checkbox : true
+				checkbox:true
 			} ] ],
 			columns : [ [ {
 				title : '名称',
@@ -51,44 +52,150 @@
 			//可以点击的时候排序
 			}, {
 				title : '编号',
-				field : 'info',
-				width : 100
+				field : 'bn',
+				width : 100,
+				sortable : true,
+				editor:{ //开启编辑属性,可编辑
+					type:'validatebox',
+					options:{
+						required:true
+					}
+				}
 			//宽度必须要给,不给可能出不来
-			}, {
+			},{
+				title : '商品简介',
+				field : 'info',
+				width : 100,
+				editor:{ //开启编辑属性,可编辑
+					type:'validatebox',
+					options:{
+						required:true
+					}
+				}
+			},{
 				title : '创建时间',
 				field : 'createtime',
 				width : 100,
 				sortable : true,
-			}, {
+				editor:{ //开启编辑属性,可编辑
+					type:'datetimebox',
+					options:{
+						required:true
+					}
+				}
+			},{
 				title : '修改时间',
 				field : 'modifytime',
 				width : 100,
 				sortable : true,
-			}, {
-				title : '商品简介',
-				field : 'bn',
-				width : 100
+				editor:{ //开启编辑属性,可编辑
+					type:'datetimebox',
+					options:{
+						required:true
+					}
+				}
 			} ] ],
 			toolbar : [ {
 				text : '增加',
 				iconCls : 'icon-add',
 				handler : function() {
-					datagrid.datagrid('appendRow',{
-					});
-					var rows=datagrid.datagrid('getRows');
-					datagrid.datagrid('beginEdit',rows.length-1); //行编辑的索引是从0开始的
+					if(admin_goods_editRow!=undefined){
+						datagrid.datagrid('endEdit',admin_goods_editRow);
+					}
+					if(admin_goods_editRow==undefined){
+						datagrid.datagrid('insertRow',{
+							index:0,
+							row: {
+								id:sy.UUID(),
+							}
+						});
+						datagrid.datagrid('beginEdit',0); //行编辑的索引是从0开始的
+						admin_goods_editRow=0;
+					}
 				}
 			}, '-', {
 				text : '删除',
 				iconCls : 'icon-remove',
 				handler : function() {
+					var rows=datagrid.datagrid('getSelections');
+					if(rows.length>0){
+						$.messager.confirm('Confirm','您确定要删除当前所有选择的项目吗?',function(r){   
+						    if (r){   
+						    	var ids=[];
+						    	for(var i=0;i<rows.length;i++){
+									ids.push(rows[i].id);						    		
+						    	}
+						        alert(ids.join(','));   
+						    }   
+						}); 
+					}else{
+						$.messager.alert('提示','请选择要删除的记录','error');
+					}
 				}
 			}, '-', {
 				text : '修改',
 				iconCls : 'icon-edit',
 				handler : function() {
+					var rows=datagrid.datagrid('getSelections');
+					if(rows.length==1){
+						if(admin_goods_editRow!=undefined){
+							datagrid.datagrid('endEdit',admin_goods_editRow);
+						}
+						if(admin_goods_editRow==undefined){
+							var index=datagrid.datagrid('getRowIndex',rows[0]);
+							datagrid.datagrid('beginEdit',index); //行编辑的索引是从0开始的
+							admin_goods_editRow=index;
+							datagrid.datagrid('unselectAll');
+						}
+					}
 				}
-			} ]
+			}, '-', {
+				text : '保存',
+				iconCls : 'icon-save',
+				handler : function() {
+					console.info(admin_goods_editRow);
+					datagrid.datagrid('endEdit',admin_goods_editRow);
+				}
+			}, '-', {
+				text : '取消编辑',
+				iconCls : 'icon-redo',
+				handler : function() {
+					admin_goods_editRow=undefined;
+					datagrid.datagrid('rejectChanges');
+				}
+			}, '-', {
+				text : '取消选中',
+				iconCls : 'icon-undo',
+				handler : function() {
+					datagrid.datagrid('clearSelections');
+					datagrid.datagrid('unselectAll');
+				}
+			} ,'-'],
+			onAfterEdit:function(rowIndex,rowData,changes){ //编辑之后执行
+				console.info(rowData);
+				$.ajax({
+					url:'',
+					type:'POST',
+					datatype:'JSON',
+					success:function(){
+						$.messager.alert('提示','ok!');
+						admin_goods_editRow=undefined;
+					},
+					error:function(){
+						
+					}
+				});
+				
+			},
+			onDblClickRow:function(rowIndex, rowData){ //双击编辑
+				if(admin_goods_editRow!=undefined){
+					datagrid.datagrid('endEdit',admin_goods_editRow);
+				}
+				if(admin_goods_editRow==undefined){
+					datagrid.datagrid('beginEdit',rowIndex); //行编辑的索引是从0开始的
+					admin_goods_editRow=rowIndex;
+				}
+			}
 		});
 		
 		admin_goods_search=function(){
