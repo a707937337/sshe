@@ -71,7 +71,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							$.messager.progress('close');
 						} catch (e) {
 						}
-					}, 1000);
+					}, 1500);
 				}
 				centerTabs.tabs('add', {
 					title : node.text,
