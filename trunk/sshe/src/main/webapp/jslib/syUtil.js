@@ -1,3 +1,5 @@
+
+var sy = $.extend({}, sy);/* 定义全局对象，类似于命名空间或包的作用 */
 /**
  * @author WangHuifeng
  * @requires Jquery,EasyUI 扩展validatebox 添加验证两次密码功能
@@ -10,25 +12,18 @@ $.extend($.fn.validatebox.defaults.rules, {
 		message : '两次密码不一致'
 	}
 });
-$.extend($.messager, {
-	showBySite : function(options, param) {
-		var site = $.extend({
-			left : "",
-			top : "",
-			right : 0,
-			bottom : -document.body.scrollTop
-			- document.documentElement.scrollTop
-		}, param || {});
-		var win = $("body > div .messager-body");
-		if (win.length <= 0)
-			$.messager.show(options);
-		win = $("body > div .messager-body");
-		win.window("window").css({
-			left : site.left,
-			top : site.top,
-			right : site.right,
-			zIndex : $.fn.window.defaults.zIndex++,
-			bottom : site.bottom
-		});
-	}
-});
+
+/**
+ * 将form表单元素的值序列化成对象
+ */
+sy.serializeObject=function(form){/*将form表单元素序列化成对象*/
+	var o={};
+	$.each(form.serializeArray(),function(index){
+		if (o[this['name']]) {
+			o[this['name']] = o[this['name']] + "," + this['value'];
+		} else {
+			o[this['name']] = this['value'];
+		}
+	});
+	return o;
+};

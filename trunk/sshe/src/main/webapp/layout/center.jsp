@@ -70,13 +70,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							$.messager.progress('close');
 						} catch (e) {
 						}
-					}, 5000);
+					}, 1000);
 				}
 				centerTabs.tabs('add', {
 					title : node.text,
 					closable : true,
 					iconCls : node.iconCls,
-					content : '<iframe src="${pageContext.request.contextPath}' + node.attributes.src + '" frameborder="0" style="border:0;width:100%;height:99.4%;"></iframe>',
+					//href:node.attributes.src,
+					content : '<iframe src="' + node.attributes.src + '" frameborder="0" style="border:0;width:100%;height:99.4%;"></iframe>',
 					tools : [ {
 						iconCls : 'icon-mini-refresh',
 						handler : function() {
@@ -101,7 +102,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 	}
 	function refreshTab(title) {
+		console.info(title);
 		var tab = centerTabs.tabs('getTab', title);
+		console.info(tab);
 		centerTabs.tabs('update', {
 			tab : tab,
 			options : tab.panel('options')

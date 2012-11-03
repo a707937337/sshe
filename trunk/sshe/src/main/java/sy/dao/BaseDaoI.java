@@ -2,6 +2,7 @@ package sy.dao;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 创建人:WangHuifeng
@@ -64,6 +65,15 @@ public interface BaseDaoI<T> {
 	 * @return
 	 */
 	public List<T> find(String hql, List<Object> param);
+	
+	/**
+	 * 查询集合
+	 * @param hql
+	 * @param param
+	 * @return
+	 * 2012-11-2 上午9:27:54
+	 */
+	public List<T> find(String hql,Map<String,Object> param); 
 
 	/**
 	 * 查询集合(带分页)
@@ -88,6 +98,18 @@ public interface BaseDaoI<T> {
 	 * @return
 	 */
 	public List<T> find(String hql, List<Object> param, Integer page, Integer rows);
+	
+	
+	/**
+	 * 查询集合(带分页)
+	 * @param hql
+	 * @param param
+	 * @param page
+	 * @param rows
+	 * @return
+	 * 2012-11-2 上午9:29:20
+	 */
+	public List<T> find(String hql,Map<String,Object> param ,Integer page,Integer rows);
 
 	/**
 	 * 获得一个对象
@@ -118,6 +140,14 @@ public interface BaseDaoI<T> {
 	public T get(String hql, List<Object> param);
 
 	/**
+	 * 获得一个对象
+	 * @param hql
+	 * @param param
+	 * @return
+	 * 2012-11-2 上午9:30:06
+	 */
+	public T get(String hql,Map<String,Object> param);
+	/**
 	 * select count(*) from 类
 	 * 
 	 * @param hql
@@ -142,6 +172,15 @@ public interface BaseDaoI<T> {
 	 * @return
 	 */
 	public Long count(String hql, List<Object> param);
+	
+	/**
+	 * select count(*) from 类
+	 * @param hql
+	 * @param param
+	 * @return
+	 * 2012-11-2 下午2:01:17
+	 */
+	public Long count(String hql,Map<String,Object> param);
 
 	/**
 	 * 执行HQL语句
@@ -168,5 +207,14 @@ public interface BaseDaoI<T> {
 	 * @return
 	 */
 	public Integer executeHql(String hql, List<Object> param);
+	
+	/**
+	 * 执行HQL语句
+	 * @param hql
+	 * @param param
+	 * @return
+	 * 2012-11-2 下午2:00:42
+	 */
+	public Integer executeHql(String hql,Map<String,Object> param);
 
 }
