@@ -41,7 +41,13 @@
 				title : '名称',
 				field : 'name',
 				width : 100,//宽度必须要给,不给可能出不来
-				sortable : true
+				sortable : true,
+				editor:{ //开启编辑属性,可编辑
+					type:'validatebox',
+					options:{
+						required:true
+					}
+				}
 			//可以点击的时候排序
 			}, {
 				title : '编号',
@@ -67,11 +73,10 @@
 				text : '增加',
 				iconCls : 'icon-add',
 				handler : function() {
-					var rows = datagrid.datagrid('getSelections');
-					for ( var i = 0; i < rows.length; i++) {
-						var name = rows[i].name;
-						alert(name);
-					}
+					datagrid.datagrid('appendRow',{
+					});
+					var rows=datagrid.datagrid('getRows');
+					datagrid.datagrid('beginEdit',rows.length-1); //行编辑的索引时从0开始的
 				}
 			}, '-', {
 				text : '删除',
