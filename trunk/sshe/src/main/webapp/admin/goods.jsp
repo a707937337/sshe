@@ -28,7 +28,7 @@
 			//idField : 'id',//一个标示,例如 如果第一页选中两个,翻页在选中1个,点删除的时候删除的是3条数据!主要用于跨页删除
 			sortName : 'name',//按照什么排序
 			sortOrder : 'desc',//排序从高到低还是从低到高
-			checkOnSelect : false,
+			checkOnSelect : true,
 			selectOnCheck : true,
 			frozenColumns : [ [ {
 				title : '编号',
@@ -51,11 +51,13 @@
 			}, {
 				title : '创建时间',
 				field : 'createtime',
-				width : 100
+				width : 100,
+				sortable : true,
 			}, {
 				title : '修改时间',
 				field : 'modifytime',
-				width : 100
+				width : 100,
+				sortable : true,
 			}, {
 				title : '商品简介',
 				field : 'bn',
@@ -66,7 +68,10 @@
 				iconCls : 'icon-add',
 				handler : function() {
 					var rows = datagrid.datagrid('getSelections');
-					alert(rows[0].id);
+					for ( var i = 0; i < rows.length; i++) {
+						var name = rows[i].name;
+						alert(name);
+					}
 				}
 			}, '-', {
 				text : '删除',
@@ -88,17 +93,22 @@
 			datagrid.datagrid('load',{});
 			admin_goods_searchForm.find('input').val('');
 		};
+		admin_goods_searchTable=$('#admin_goods_searchTable input').bind('keyup',function(event){
+			if(event.keyCode==13){
+				admin_goods_search();
+			}
+		});
 	});
 </script>
 </head>
 <body>
 	<div title="用户管理" class="easyui-layout"
 		data-options="border:false,fit:true">
-		<div data-options="region:'north',title:'查询',border:false" style="height: 100px;overflow: hidden">
+		<div data-options="region:'north',title:'查询',border:false" style="height: 105px;overflow: hidden">
 			<form id='admin_goods_searchForm'>
-				<table class="tableForm datagrid-toolbar">
+				<table class="tableForm datagrid-toolbar" id="admin_goods_searchTable">
 					<tr>
-						<th>用户名</th>
+						<th>商品名称</th>
 						<td><input name='name'/></td>
 					</tr>
 					<tr>
@@ -108,8 +118,8 @@
 					<tr>
 						<th>最后修改时间</th>
 						<td><input name='modifytimeStart' class='easyui-datetimebox' editable='false'/>至<input name='modifytimeEnd' class='easyui-datetimebox' editable='false'/>
-							<a class='easyui-linkbutton' href='javascript:void(0)' onclick="admin_goods_search()">查询</a>
-							<a class='easyui-linkbutton' href='javascript:void(0)' onclick="admin_goods_clear()">清空</a>
+							<a class='easyui-linkbutton' plain=true href='javascript:void(0)' onclick="admin_goods_search()">查询</a>
+							<a class='easyui-linkbutton' plain=true href='javascript:void(0)' onclick="admin_goods_clear()">清空</a>
 						</td>
 					</tr>
 				</table>

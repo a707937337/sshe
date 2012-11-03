@@ -60,6 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			centerTabs.tabs('select', node.text);
 		} else {
 			if (node.attributes.src && node.attributes.src.length > 0) {
+				console.info(node.attributes.src);
 				if (node.attributes.src.indexOf('!druid.action') < 0) {/*数据源监控页面不需要开启等待提示*/
 					$.messager.progress({
 						text : '页面加载中....',
@@ -85,7 +86,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						}
 					} ]
 				});
-			} else {
+			}
+			/*
+			else {
 				centerTabs.tabs('add', {
 					title : node.text,
 					closable : true,
@@ -98,7 +101,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						}
 					} ]
 				});
-			}
+			}*/
 		}
 	}
 	function refreshTab(title) {
