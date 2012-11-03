@@ -76,7 +76,7 @@
 					datagrid.datagrid('appendRow',{
 					});
 					var rows=datagrid.datagrid('getRows');
-					datagrid.datagrid('beginEdit',rows.length-1); //行编辑的索引时从0开始的
+					datagrid.datagrid('beginEdit',rows.length-1); //行编辑的索引是从0开始的
 				}
 			}, '-', {
 				text : '删除',
