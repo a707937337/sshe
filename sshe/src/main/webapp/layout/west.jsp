@@ -11,6 +11,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			lines:true,
 			onClick:function(node){
 				addTab(node);
+			},onDblClick : function(node) {
+				if (node.state == 'closed') {
+					$(this).tree('expand', node.target);
+				} else {
+					$(this).tree('collapse', node.target);
+				}
 			}
 		});		
 	});
