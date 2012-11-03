@@ -8,11 +8,12 @@ import org.apache.log4j.Logger;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ModelDriven;
 
-import sy.model.Tuser;
+import sy.model.SyUser;
 import sy.pageModel.User;
 import sy.pageModel.util.Json;
 import sy.service.UserServiceI;
@@ -23,9 +24,14 @@ import sy.util.BaseAction;
  * 创建人： 王汇丰
  * 创建时间：2012-10-31 下午5:40:15
  */
+/**
+ * 创建人:WangHuifeng
+ * 创建时间:2012-11-1 下午4:13:43
+ */
+ 
 @ParentPackage("basePackage")// 这里是package的name
 @Namespace("/")//命名空间
-@Action(value = "userAction")//这里是action的name,放这里得支持动态方法调用  例如:xxxAction!add.action
+@Action(value = "userAction",results={@Result(name="user",location="/admin/user.jsp")})//这里是action的name,放这里得支持动态方法调用  例如:xxxAction!add.action
 public class UserAction extends BaseAction implements ModelDriven<User>{
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = Logger.getLogger(UserAction.class);
@@ -36,53 +42,6 @@ public class UserAction extends BaseAction implements ModelDriven<User>{
 	}
 	@Autowired
 	private UserServiceI userService;
-	/**
-	 * 创建人:WangHuifeng
-	 * 创建时间:2012-10-31 下午1:49:58
-	 * @return void
-	 */
-	public void reg(){
-		Json j=new Json();
-		try {
-			userService.reg(user);
-			j.setSuccess(true);
-			j.setMsg("注册成功");
-			j.setObj(null);
-		} catch (Exception e) {
-			j.setMsg("注册失败！");
-			e.printStackTrace();
-		}
-		super.writeJson(j);
-	}
-	/**
-	 * @author 王汇丰
-	 * 2012-10-31 下午5:40:45
-	 * @returnType void 
-	 * @information 登陆
-	 */
-	public void login(){
-		Json j=new Json();
-		User u=userService.login(user);
-		if(u!=null){
-			j.setSuccess(true);
-			j.setMsg("登陆成功");
-			j.setObj(null);
-			session.put("currentUser", user);
-		}else{
-			j.setMsg("登陆失败");
-		}
-		super.writeJson(j);
-	}
-	/**
-	 * @author 王汇丰
-	 * 2012-10-31 下午7:09:51
-	 * @returnType void 
-	 * @information 获取用户左边菜单栏
-	 */
-	public void meun(){
-		
-	}
-	
 	public UserServiceI getUserService() {
 		return userService;
 	}
@@ -101,7 +60,58 @@ public class UserAction extends BaseAction implements ModelDriven<User>{
 	public void setUser(User user) {
 		this.user = user;
 	}
+	/**
+	 * 创建人:WangHuifeng
+	 * 创建时间:2012-10-31 下午1:49:58
+	 * @return void
+	 */
+	public void reg(){
+		Json j=new Json();
+		try {
+			userService.reg(user);
+			j.setSuccess(true);
+			j.setMsg("注册成功");
+			j.setObj(null);
+		} catch (Exception e) {
+			j.setMsg("注册失败！");
+			e.printStackTrace();
+		}
+		super.writeJson(j);
+	}
 	
+	/**
+	 * 登陆action
+	 * @return void
+	 * 2012-11-1 下午4:09:53
+	 */
+	public void login(){
+		Json j=new Json();
+		User u=userService.login(user);
+		if(u!=null){
+			j.setSuccess(true);
+			j.setMsg("登陆成功");
+			j.setObj(null);
+			session.put("currentUser", user);
+		}else{
+			j.setMsg("登陆失败");
+		}
+		super.writeJson(j);
+	}
+	
+	/**
+	 * @return
+	 * 2012-11-1 下午4:13:45
+	 */
+	public String user(){
+		return "user";
+	}
+	/**
+	 * 获取用户表格内容
+	 * 2012-11-1 下午4:20:18
+	 */
+	public void datagrid(){
+		
+	}
 	
 
 }

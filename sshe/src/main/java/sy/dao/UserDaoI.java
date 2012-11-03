@@ -1,9 +1,9 @@
 package sy.dao;
 
-import sy.model.Tuser;
+import sy.model.SyUser;
 import sy.pageModel.User;
 
-public interface UserDaoI extends BaseDaoI<Tuser>{
+public interface UserDaoI extends BaseDaoI<SyUser>{
 
 	/**
 	 * 创建人:WangHuifeng
