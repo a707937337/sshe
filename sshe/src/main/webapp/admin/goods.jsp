@@ -5,10 +5,6 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-<!DOCTYPE html>
-<html>
-<head>
-<jsp:include page="../init.jsp"></jsp:include>
 <script type="text/javascript" charset="utf-8">
 	var datagrid;
 	$(function() {
@@ -230,8 +226,6 @@
 		});
 	});
 </script>
-</head>
-<body>
 	<div title="用户管理" class="easyui-layout"
 		data-options="border:false,fit:true">
 		<div data-options="region:'north',title:'查询',border:false" style="height: 105px;overflow: hidden">
@@ -248,8 +242,8 @@
 					<tr>
 						<th>最后修改时间</th>
 						<td><input name='modifytimeStart' class='easyui-datetimebox' editable='false'/>至<input name='modifytimeEnd' class='easyui-datetimebox' editable='false'/>
-							<a class='easyui-linkbutton' plain=true href='javascript:void(0)' onclick="admin_goods_search()">查询</a>
-							<a class='easyui-linkbutton' plain=true href='javascript:void(0)' onclick="admin_goods_clear()">清空</a>
+							<a class='easyui-linkbutton' plain='true' href='javascript:void(0)' onclick="admin_goods_search()">查询</a>
+							<a class='easyui-linkbutton' plain='true' href='javascript:void(0)' onclick="admin_goods_clear()">清空</a>
 						</td>
 					</tr>
 				</table>
@@ -260,5 +254,3 @@
 		</div>
 		<div id="toolbar"></div>
 	</div>
-</body>
-</html>
