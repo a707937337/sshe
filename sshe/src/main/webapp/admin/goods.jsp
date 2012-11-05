@@ -103,6 +103,15 @@
 						datagrid.datagrid('endEdit',admin_goods_editRow);
 					}
 					if(admin_goods_editRow==undefined){
+						datagrid.datagrid('addEditor',{
+							field:'bn',//我要改变bn行的可编辑状态,让他能编辑
+							editor:{ //开启编辑属性,可编辑
+								type:'validatebox',
+								options:{
+									required:true
+								}
+							}
+						});
 						datagrid.datagrid('insertRow',{
 							index:0,
 							row: {
@@ -138,6 +147,7 @@
 				handler : function() {
 					var rows=datagrid.datagrid('getSelections');
 					if(rows.length==1){
+						datagrid.datagrid('removeEditor','bn');
 						if(admin_goods_editRow!=undefined){
 							datagrid.datagrid('endEdit',admin_goods_editRow);
 						}
@@ -147,6 +157,10 @@
 							admin_goods_editRow=index;
 							datagrid.datagrid('unselectAll');
 						}
+					}else if(rows.length<1){
+						$.messager.alert('提示','请选择需要修改的项目!','info');
+					}else if(rows.length>1){
+						$.messager.alert('提示','同一时间只能编辑一条记录!','info');
 					}
 				}
 			}, '-', {
@@ -173,25 +187,29 @@
 			} ,'-'],
 			onAfterEdit:function(rowIndex,rowData,changes){ //编辑之后执行
 				console.info(rowData);
+				/*
 				$.ajax({
 					url:'',
 					type:'POST',
 					datatype:'JSON',
 					success:function(){
 						$.messager.alert('提示','ok!');
+						*/
 						admin_goods_editRow=undefined;
+					/*
 					},
 					error:function(){
 						
 					}
 				});
-				
+				*/
 			},
 			onDblClickRow:function(rowIndex, rowData){ //双击编辑
 				if(admin_goods_editRow!=undefined){
 					datagrid.datagrid('endEdit',admin_goods_editRow);
 				}
 				if(admin_goods_editRow==undefined){
+					datagrid.datagrid('removeEditor','bn');
 					datagrid.datagrid('beginEdit',rowIndex); //行编辑的索引是从0开始的
 					admin_goods_editRow=rowIndex;
 				}
