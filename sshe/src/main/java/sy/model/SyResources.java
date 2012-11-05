@@ -20,7 +20,7 @@ import javax.persistence.UniqueConstraint;
  * SyResources entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "syresources", catalog = "sshe", uniqueConstraints = @UniqueConstraint(columnNames = "PID"))
+@Table(name = "syresources", uniqueConstraints = @UniqueConstraint(columnNames = "PID"))
 public class SyResources implements java.io.Serializable {
 
 	// Fields

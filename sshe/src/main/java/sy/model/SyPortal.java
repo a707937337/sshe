@@ -12,7 +12,7 @@ import javax.persistence.Table;
  * SyPortal entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "syportal", catalog = "sshe")
+@Table(name = "syportal")
 public class SyPortal implements java.io.Serializable {
 
 	// Fields

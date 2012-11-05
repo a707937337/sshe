@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 @Entity
-@Table(name = "symenu", catalog = "sshe")
+@Table(name = "symenu")
 public class SyMenu implements java.io.Serializable {
 
 

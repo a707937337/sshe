@@ -15,7 +15,7 @@ import javax.persistence.UniqueConstraint;
  * SyuserSyrole entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "syuser_syrole", catalog = "sshe", uniqueConstraints = { @UniqueConstraint(columnNames = "SYROLE_ID"), @UniqueConstraint(columnNames = "SYUSER_ID") })
+@Table(name = "syuser_syrole", uniqueConstraints = { @UniqueConstraint(columnNames = "SYROLE_ID"), @UniqueConstraint(columnNames = "SYUSER_ID") })
 public class SyuserSyrole implements java.io.Serializable {
 
 	// Fields
