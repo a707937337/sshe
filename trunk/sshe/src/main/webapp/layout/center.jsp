@@ -82,7 +82,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					tools : [ {
 						iconCls : 'icon-mini-refresh',
 						handler : function() {
-							refreshTab(node.text);
+							refreshTab(node);
 						}
 					} ]
 				});
@@ -104,14 +104,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}*/
 		}
 	}
-	function refreshTab(title) {
-		console.info(title);
-		var tab = centerTabs.tabs('getTab', title);
-		console.info(tab);
-		centerTabs.tabs('update', {
-			tab : tab,
-			options : tab.panel('options')
-		});
+	function refreshTab(node) {
+		var tab = centerTabs.tabs('getTab', node.text);
+		//centerTabs.tabs('update', {
+		//	tab : tab,
+		//	options : tab.panel('options')
+		//});
+		
+		tab.panel('refresh',node.attributes.src);
+
+		
 	}
 </script>
 <div id="layout_center_tabs">
