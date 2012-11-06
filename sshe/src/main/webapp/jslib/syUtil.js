@@ -78,7 +78,7 @@ $.extend($.fn.datagrid.defaults.editors, {
  * 
  * datagrid.datagrid('removeEditor', 'cpwd');
  * 
- * datagrid.datagrid('addEditor', [ { field : 'createdatetime', editor : { type : 'datetimebox', options : { editable : false } } }, { field : 'cmodifydatetime', editor : { type : 'datetimebox', options : { editable : false } } } ]);
+ * datagrid.datagrid('addEditor', [ { field : 'createtime', editor : { type : 'datetimebox', options : { editable : false } } }, { field : 'cmodifytime', editor : { type : 'datetimebox', options : { editable : false } } } ]);
  * 
  */
 $.extend($.fn.datagrid.methods, {
@@ -163,3 +163,38 @@ $.fn.window.defaults.onMove = easyuiPanelOnMove;
 $.fn.panel.defaults.onMove = easyuiPanelOnMove;
 
 
+/**
+ * @author 夏季
+ * 简单的树形结构 p,pid,text
+ */
+$.fn.tree.defaults.loadFilter = function (data, parent) {
+	var opt = $(this).data().tree.options;
+	var idFiled,
+	textFiled,
+	parentField;
+	if (opt.parentField) {
+		idFiled = opt.idFiled || 'id';
+		textFiled = opt.textFiled || 'text';
+		parentField = opt.parentField;
+		var i,
+		l,
+		treeData = [],
+		tmpMap = [];
+		for (i = 0, l = data.length; i < l; i++) {
+			tmpMap[data[i][idFiled]] = data[i];
+		}
+		for (i = 0, l = data.length; i < l; i++) {
+			if (tmpMap[data[i][parentField]] && data[i][idFiled] != data[i][parentField]) {
+				if (!tmpMap[data[i][parentField]]['children'])
+					tmpMap[data[i][parentField]]['children'] = [];
+				data[i]['text'] = data[i][textFiled];
+				tmpMap[data[i][parentField]]['children'].push(data[i]);
+			} else {
+				data[i]['text'] = data[i][textFiled];
+				treeData.push(data[i]);
+			}
+		}
+		return treeData;
+	}
+	return data;
+};
