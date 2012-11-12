@@ -36,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						closeTabsTitle.push(opt.title);
 					}
 				});
-	
+	                                                         
 				for ( var i = 0; i < closeTabsTitle.length; i++) {
 					centerTabs.tabs('close', closeTabsTitle[i]);
 				}
@@ -60,7 +60,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			centerTabs.tabs('select', node.text);
 		} else {
 			if (node.attributes.src && node.attributes.src.length > 0) {
-				console.info(node.attributes.src);
 				if (node.attributes.src.indexOf('!druid.action') < 0) {/*数据源监控页面不需要开启等待提示*/
 					$.messager.progress({
 						text : '页面加载中....',
@@ -77,8 +76,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					title : node.text,
 					closable : true,
 					iconCls : node.iconCls,
-					href:node.attributes.src,
-					//content : '<iframe src="' + node.attributes.src + '" frameborder="0" style="border:0;width:100%;height:99.4%;"></iframe>',
+					//href:node.attributes.src,
+					content : '<iframe src="' + node.attributes.src + '" frameborder="0" style="border:0;width:100%;height:99.4%;"></iframe>',
 					tools : [ {
 						iconCls : 'icon-mini-refresh',
 						handler : function() {
@@ -106,12 +105,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 	function refreshTab(node) {
 		var tab = centerTabs.tabs('getTab', node.text);
-		//centerTabs.tabs('update', {
-		//	tab : tab,
-		//	options : tab.panel('options')
-		//});
+		centerTabs.tabs('update', {
+			tab : tab,
+			options : tab.panel('options')
+		});
 		
-		tab.panel('refresh',node.attributes.src);
+		//tab.panel('refresh',node.attributes.src);
 
 		
 	}
@@ -126,3 +125,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div type="closeOther">关闭其他</div>
 	<div type="closeAll">关闭所有</div>
 </div>
+
+<div id="layout_center_parent"></div>
