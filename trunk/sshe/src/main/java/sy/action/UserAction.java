@@ -29,8 +29,6 @@ import sy.util.BaseAction;
  * 创建时间:2012-11-1 下午4:13:43
  */
  
-@ParentPackage("basePackage")// 这里是package的name
-@Namespace("/")//命名空间
 @Action(value = "userAction",results={@Result(name="user",location="/admin/user.jsp")})//这里是action的name,放这里得支持动态方法调用  例如:xxxAction!add.action
 public class UserAction extends BaseAction implements ModelDriven<User>{
 	private static final long serialVersionUID = 1L;

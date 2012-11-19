@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -15,6 +17,8 @@ import com.alibaba.fastjson.JSON;
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("unchecked")
+@ParentPackage("basePackage")// 这里是package的name
+@Namespace("/")//命名空间
 public class BaseAction extends ActionSupport implements SessionAware, ServletRequestAware, ServletResponseAware {
 	/**
 	 * 

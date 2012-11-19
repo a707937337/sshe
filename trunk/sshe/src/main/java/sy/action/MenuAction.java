@@ -18,9 +18,6 @@ import sy.util.BaseAction;
  * 创建人： 王汇丰 创建时间：2012-10-31 下午7:56:26
  */
 
-@ParentPackage("basePackage")
-// 这里是package的name
-@Namespace("/")
 @Action(value = "menuAction")
 public class MenuAction extends BaseAction implements ModelDriven<Menu> {
 	private Menu menu=new Menu();
