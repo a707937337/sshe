@@ -169,12 +169,14 @@
 							} ],
 							buttons : [ {
 								text : 'Save',
+								iconCls : 'icon-help',
 								handler : function() {
 									alert('save');
 								}
 							}, {
 								text : 'Close',
 								plain:true,
+								iconCls : 'icon-help',
 								handler : function() {
 									alert('close');
 								}
@@ -314,7 +316,7 @@
 				</table>
 			</form>
 		</div>
-		<div data-options="region:'center',fit:true" style="overflow: hidden">
+		<div data-options="region:'center'" style="overflow: hidden">
 			<table id="datagrid" data-options="fit:true"></table>
 		</div>
 		<div id="toolbar" style="display: none">12312312312312</div>

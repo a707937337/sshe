@@ -77,7 +77,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					closable : true,
 					iconCls : node.iconCls,
 					//href:node.attributes.src,
-					content : '<iframe src="' + node.attributes.src + '" frameborder="0" style="border:0;width:100%;height:99.4%;"></iframe>',
+					content : '<iframe src="${pageContext.request.contextPath}'+'/' + node.attributes.src + '" frameborder="0" style="border:0;width:100%;height:99.4%;"></iframe>',
 					tools : [ {
 						iconCls : 'icon-mini-refresh',
 						handler : function() {
@@ -104,6 +104,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 	}
 	function refreshTab(node) {
+		alert(node.text);
 		var tab = centerTabs.tabs('getTab', node.text);
 		centerTabs.tabs('update', {
 			tab : tab,
