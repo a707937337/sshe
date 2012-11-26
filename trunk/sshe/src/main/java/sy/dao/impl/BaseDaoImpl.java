@@ -9,9 +9,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import sy.dao.BaseDaoI;
 @Repository("baseDao")
 @SuppressWarnings("unchecked")
-public class BaseDaoImpl<T>{
+public class BaseDaoImpl<T> implements BaseDaoI<T>{
 	@Autowired
 	private SessionFactory sessionFactory;
 

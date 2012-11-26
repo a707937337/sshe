@@ -21,7 +21,8 @@ public class UserServiceImpl implements UserServiceI {
 
 	@Override
 	public void test() {
-		logger.info("测试!");
+		System.out.println("ceshi~");
+		logger.info("测试!-------------------------------------");
 	}
 
 	public UserDaoI getUserDao() {
@@ -48,5 +49,9 @@ public class UserServiceImpl implements UserServiceI {
 	public List<SyUser> find() {
 		return userDao.find("");
 	}
-	
+
+	public static void main(String[] args) {
+		UserServiceImpl u=new UserServiceImpl();
+		u.test();
+	}
 }
